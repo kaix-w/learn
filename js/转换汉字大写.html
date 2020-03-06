@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>js学习</title>
+</head>
+<body>
+<script type="text/javascript">
+	// var a = parseInt(window.prompt('input'));
+	// var b = 1;
+	// for (var i = a-1; i >= 0; i--) {
+	// 	b*=2;
+	// };
+	// document.write(b);
+	// var arr = [1,2,3,'as','asa'];
+	// for (var i = 0;i< arr.length;i++) {
+	// 	console.log(arr[i]);
+	// };
+	// var ob = {
+	// 	name : 'xiaowang',
+	// 	sex : 'nan',
+	// 	age : 18
+	// }
+	// console.log(ob.name)
+	//银行家算法
+	function toWord(word) {//准换中文
+		switch(parseInt(word)) {
+			case 1:
+				return "壹";
+				break;
+			case 2:
+				return "贰";
+				break;
+			case 3:
+				return "叁";
+				break;
+			case 4:
+				return "肆";
+				break;
+			case 5:
+				return "伍";
+				break;
+			case 6:
+				return "陆";
+				break;
+			case 7:
+				return "柒";
+				break;
+			case 8:
+				return "捌";
+				break;
+			case 9:
+				return "玖";
+				break;
+			case 0:
+				return "零";
+				break;
+		}
+	}
+	function four(num1){
+		var num2 = parseInt(num1);
+		var str1 = num2.toString();
+		switch(str1.length) {
+			case 4://四位数
+				var temp = num2;
+				if(parseInt(temp%1000/100) == 0 && parseInt(temp%100/10) == 0 && temp%10 !=0){
+					return toWord(temp/1000) +"仟"+"零"+ toWord(temp%10);
+				}
+				if(parseInt(temp%1000/100) == 0 && parseInt(temp%100/10) ==0 &&temp%10 ==0){
+					return toWord(temp/1000) + "仟";
+				}
+
+				if(parseInt(temp%1000/100) == 0 && parseInt(temp%100/10) !=0 && temp%10 != 0) {
+					return toWord(temp/1000) +"仟" + "零" + toWord(temp%100/10) + "拾" + toWord(temp%10);
+				}
+				if (parseInt(temp%1000/100) != 0 && parseInt(temp%100/10) ==0 &&temp%10 !=0) {
+					return toWord(temp/1000) +"仟" + toWord(temp%1000/100) + "佰" + "零" + toWord(temp%10);
+				}
+				if (parseInt(temp%1000/100) != 0 && parseInt(temp%100/10) !=0 &&temp%10 ==0) {
+					return toWord(temp/1000) +"仟" + toWord(temp%1000/100) + "佰" + toWord(temp%100/10) + "拾";
+				}
+				else{
+					return toWord(temp/1000) +"仟" + toWord(temp%1000/100) + "佰" + toWord(temp%100/10) + "拾"+ toWord(temp%10);
+				}
+				break;
+			case 3 :
+				var temp = num2;
+				temp = parseInt(str1);
+				if(parseInt(temp%100/10) == 0 && temp%10 == 0 ){
+					return toWord(temp/100) + "佰";
+				}
+				if(parseInt(temp%100/10) == 0 && temp%10 != 0 ) {
+					return toWord(temp/100) + "佰" + "零" + toWord(temp%10);
+				}
+				else {
+					return toWord(temp/100) + "佰" +toWord(temp%100/10) + "拾" + toWord(temp%10);
+				}
+				break;
+			case 2 :
+				var temp = num2;
+				if(temp%10 == 0) {
+					return toWord(temp/10) + "拾";
+				}else {
+					return toWord(temp/10) + "拾" + toWord(temp%10);
+				}
+				break;
+			case 1 :
+				var temp = num2;
+				temp = parseInt(str1);
+				return toWord(temp);
+				break;
+
+		}
+	}
+	function changeName(num) {
+		var s = num.toString();
+		if(s.length > 4) { //判断是不是大于四位
+			var n = parseInt(s);
+			return four(n/10000) + "万" + four(n%10000);
+		}else{
+			return four(num);
+		}
+
+	}
+
+	var inp = parseInt(window.prompt());
+	document.write(changeName(inp));
+</script>
+</body>
+</html>
